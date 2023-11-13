@@ -1,7 +1,14 @@
-name: MyPlugin
-version: '${project.version}'
-main: main.MyPlugin
+api: "1.15"
+name: ClueScrollManager
+version: "${project.version}"
+main: main.ClueScrollManager
 api-version: 1.15
-author: yourName
-#commands:
-
+author: Izocel
+softdepends: [Vault, ClueScroll]
+commands:
+  scroll-exchange:
+    description: Used to exchange scrolls for higher tiers scrolls
+    usage: /scroll-exchange <tier:number> <amount:number>
+  scroll-recycle:
+    description: Used to exchange scrolls for coins
+    usage: /scroll-exchange <tier:number> <amount:number>

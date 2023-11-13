@@ -4,12 +4,12 @@
     xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
     <modelVersion>4.0.0</modelVersion>
-    <name>MyPlugin</name>
-    <groupId>com.yourdomain.myplugin</groupId>
-    <artifactId>MyPlugin</artifactId>
-    <version>2023.1.${maven.build.timestamp}</version>
+    <name>ClueScrollManager</name>
+    <groupId>com.rvdporjects.clueScrollManager</groupId>
+    <artifactId>ClueScrollManager</artifactId>
+    <version>2024.1.${maven.build.timestamp}</version>
     <packaging>jar</packaging>
-    
+
 
     <properties>
         <java.version>18</java.version>
@@ -65,6 +65,10 @@
             <name>m2-dv8tion</name>
             <url>https://m2.dv8tion.net/releases</url>
         </repository>
+        <repository>
+            <id>jitpack.io</id>
+            <url>https://jitpack.io</url>
+        </repository>
     </repositories>
 
     <dependencies>
@@ -78,6 +82,17 @@
             <groupId>net.dv8tion</groupId>
             <artifactId>JDA</artifactId>
             <version>4.4.1_353</version>
+        </dependency>
+        <dependency>
+            <groupId>com.github.MilkBowl</groupId>
+            <artifactId>VaultAPI</artifactId>
+            <version>1.7.1</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.github.electro2560</groupId>
+            <artifactId>ClueScrollsAPI</artifactId>
+            <version>master</version>
         </dependency>
     </dependencies>
 </project>
