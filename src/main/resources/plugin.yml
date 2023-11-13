@@ -6,9 +6,9 @@ api-version: 1.15
 author: Izocel
 softdepends: [Vault, ClueScroll]
 commands:
-  scroll-exchange:
-    description: Used to exchange scrolls for higher tiers scrolls
+  scroll-upgrade:
+    description: Used to upgrade scrolls to higher tiers scrolls
     usage: /scroll-exchange <tier:number> <amount:number>
-  scroll-recycle:
+  scroll-exchange:
     description: Used to exchange scrolls for coins
     usage: /scroll-exchange <tier:number> <amount:number>
