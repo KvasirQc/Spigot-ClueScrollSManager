@@ -1,0 +1,7 @@
+name: MyPlugin
+version: '${project.version}'
+main: main.MyPlugin
+api-version: 1.15
+author: yourName
+#commands:
+
