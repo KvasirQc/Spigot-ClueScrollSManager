@@ -1,8 +1,5 @@
-package commands.bukkit;
+package main.commands.bukkit;
 
-import org.bukkit.command.Command;
-import org.bukkit.command.CommandSender;
-
-public interface IPlayerCmd  {
+public interface IPlayerCmd {
     abstract void execute();
 }
