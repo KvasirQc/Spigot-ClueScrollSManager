@@ -17,10 +17,10 @@ public class ScrollExchangeCmd extends PlayerBaseCmd {
       case "common":
         return 5;
 
-      case "legendary":
+      case "special":
         return 10;
 
-      case "special":
+      case "legendary":
         return 15;
 
       default:
@@ -40,10 +40,10 @@ public class ScrollExchangeCmd extends PlayerBaseCmd {
         logger.info(msg);
         return;
       }
-
-      final int askedAmount = Integer.parseInt(args.length > 1 ? args[1] : "64");
-      final String askedTier = args[0].toString().toLowerCase();
-      final int scrollValue = getScrollTierValue(askedTier);
+      
+      final String sourceTier = args[0].toString().toLowerCase();
+      final int sourceMaxAmount = Integer.parseInt(args.length > 1 ? args[1] : "64");
+      final int scrollValue = getScrollTierValue(sourceTier);
 
       if (scrollValue <= 0) {
         final String msg = "Unable to establish a scroll exchange: Invalid arguments the scroll value is negative.";
@@ -52,10 +52,10 @@ public class ScrollExchangeCmd extends PlayerBaseCmd {
         return;
       }
 
-      if (!api.getTiers().contains(askedTier) || askedAmount < 1) {
+      if (!api.getTiers().contains(sourceTier) || sourceMaxAmount < 1) {
         final String msg = String.format(
             "Unable to establish a scroll exchange: Invalid amount or tier --> [Tier: %1$s | Amount: %2$s]",
-            askedTier, askedAmount);
+            sourceTier, sourceMaxAmount);
 
         player.sendMessage(msg);
         logger.info(msg);
@@ -65,7 +65,7 @@ public class ScrollExchangeCmd extends PlayerBaseCmd {
       int exchangeCount = 0;
       final ItemStack[] playerItems = player.getInventory().getContents();
       for (ItemStack itemStack : playerItems) {
-        if ((exchangeCount == askedAmount)) {
+        if ((exchangeCount == sourceMaxAmount)) {
           break;
         }
 
@@ -74,7 +74,7 @@ public class ScrollExchangeCmd extends PlayerBaseCmd {
         }
 
         final String itemTier = api.getScrollTier(itemStack);
-        if (itemTier == null || !itemTier.equals(askedTier)) {
+        if (itemTier == null || !itemTier.equals(sourceTier)) {
           continue;
         }
 
@@ -83,7 +83,7 @@ public class ScrollExchangeCmd extends PlayerBaseCmd {
       }
 
       if (exchangeCount <= 0) {
-        final String msg = String.format("No %1$s scrolls where found in your inventory...", askedTier);
+        final String msg = String.format("No %1$s scrolls where found in your inventory...", sourceTier);
         player.sendMessage(msg);
         logger.info(msg);
         return;
@@ -93,7 +93,7 @@ public class ScrollExchangeCmd extends PlayerBaseCmd {
       EconomyManager.depositPlayer(player, depositValue);
 
       final String msg = String.format("Player %1$s exchanged %2$s %3$s scrolls at %4$s$ each.", player.getName(),
-          exchangeCount, askedTier, scrollValue);
+          exchangeCount, sourceTier, scrollValue);
 
       player.sendMessage(msg);
       logger.info(msg);
