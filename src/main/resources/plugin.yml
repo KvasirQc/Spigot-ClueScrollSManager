@@ -4,7 +4,7 @@ version: "${project.version}"
 main: main.ClueScrollManager
 api-version: 1.15
 author: Izocel
-softdepends: [Vault, ClueScroll]
+softdepends: [Vault, ClueScrolls]
 commands:
   scroll-upgrade:
     description: Used to upgrade scrolls to higher tiers scrolls

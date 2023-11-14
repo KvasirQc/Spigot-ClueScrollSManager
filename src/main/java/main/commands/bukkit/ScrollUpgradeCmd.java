@@ -1,10 +1,8 @@
-package commands.bukkit;
+package main.commands.bukkit;
 
 import main.ClueScrollManager;
 
 public class ScrollUpgradeCmd extends PlayerBaseCmd {
-
-  private final ConfigManager configs;
 
   public ScrollUpgradeCmd(ClueScrollManager plugin, String cmdName) {
     super(plugin, cmdName);

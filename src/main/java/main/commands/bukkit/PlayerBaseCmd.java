@@ -1,4 +1,4 @@
-package commands.bukkit;
+package main.commands.bukkit;
 
 import java.util.logging.Logger;
 
@@ -9,7 +9,6 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import main.ClueScrollManager;
-import main.WhitelistDmc;
 
 public class PlayerBaseCmd implements IPlayerCmd, CommandExecutor {
 
@@ -17,7 +16,7 @@ public class PlayerBaseCmd implements IPlayerCmd, CommandExecutor {
   protected Player player;
   protected String cmdName;
   protected Logger logger;
-  protected Sender sender;
+  protected CommandSender sender;
   protected Command cmd;
   protected String label;
   protected String[] args;
