@@ -34,7 +34,7 @@ public class ScrollExchangeCmd extends PlayerBaseCmd {
       final ClueScrollsAPI api = plugin.getScrollAPI();
 
       if (args == null || args[0] == null) {
-        final String msg = "Unable to make scroll exchange: Invalid arguments tier is required.";
+        final String msg = "Unable to establish a scroll exchange: Invalid arguments tier is required.";
 
         player.sendMessage(msg);
         logger.info(msg);
@@ -46,7 +46,7 @@ public class ScrollExchangeCmd extends PlayerBaseCmd {
       final int scrollValue = getScrollTierValue(askedTier);
 
       if (scrollValue <= 0) {
-        final String msg = "Unable to make scroll exchange: Invalid arguments the sroll value is negative.";
+        final String msg = "Unable to establish a scroll exchange: Invalid arguments the scroll value is negative.";
         player.sendMessage(msg);
         logger.info(msg);
         return;
@@ -54,7 +54,7 @@ public class ScrollExchangeCmd extends PlayerBaseCmd {
 
       if (!api.getTiers().contains(askedTier) || askedAmount < 1) {
         final String msg = String.format(
-            "Unable to make scroll exchange: Invalid amount or tier --> [Tier: %1$s | Amount: %2$s]",
+            "Unable to establish a scroll exchange: Invalid amount or tier --> [Tier: %1$s | Amount: %2$s]",
             askedTier, askedAmount);
 
         player.sendMessage(msg);
@@ -83,7 +83,7 @@ public class ScrollExchangeCmd extends PlayerBaseCmd {
       }
 
       if (exchangeCount <= 0) {
-        final String msg = String.format("No %1$s scroll was found in your inventory...");
+        final String msg = String.format("No %1$s scrolls where found in your inventory...", askedTier);
         player.sendMessage(msg);
         logger.info(msg);
         return;
