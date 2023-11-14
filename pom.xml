@@ -83,6 +83,7 @@
             <groupId>com.github.electro2560</groupId>
             <artifactId>ClueScrollsAPI</artifactId>
             <version>master</version>
+            <scope>provided</scope>
         </dependency>
     </dependencies>
 </project>
