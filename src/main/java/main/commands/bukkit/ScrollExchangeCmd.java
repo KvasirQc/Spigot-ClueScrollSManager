@@ -1,6 +1,5 @@
 package main.commands.bukkit;
 
-import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 
 import com.electro2560.dev.cluescrolls.api.ClueScrollsAPI;
@@ -9,16 +8,30 @@ import main.ClueScrollManager;
 import main.EconomyManager;
 
 public class ScrollExchangeCmd extends PlayerBaseCmd {
-
   public ScrollExchangeCmd(ClueScrollManager plugin, String cmdName) {
     super(plugin, cmdName);
+  }
+
+  private int getScrollTierValue(String tierName) {
+    switch (tierName.toLowerCase()) {
+      case "common":
+        return 5;
+
+      case "legendary":
+        return 10;
+
+      case "special":
+        return 15;
+
+      default:
+        return 1;
+    }
   }
 
   @Override
   public void execute() {
     try {
       final ClueScrollsAPI api = plugin.getScrollAPI();
-      final int scrollValue = 5;
 
       if (args == null || args[0] == null) {
         final String msg = "Unable to make scroll exchange: Invalid arguments tier is required.";
@@ -28,15 +41,16 @@ public class ScrollExchangeCmd extends PlayerBaseCmd {
         return;
       }
 
+      final int askedAmount = Integer.parseInt(args.length > 1 ? args[1] : "64");
+      final String askedTier = args[0].toString().toLowerCase();
+      final int scrollValue = getScrollTierValue(askedTier);
+
       if (scrollValue <= 0) {
         final String msg = "Unable to make scroll exchange: Invalid arguments the sroll value is negative.";
         player.sendMessage(msg);
         logger.info(msg);
         return;
       }
-
-      final String askedTier = args[0].toString().toLowerCase();
-      final int askedAmount = Integer.parseInt(args.length > 1 ? args[1] : "256");
 
       if (!api.getTiers().contains(askedTier) || askedAmount < 1) {
         final String msg = String.format(
