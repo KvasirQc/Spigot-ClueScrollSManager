@@ -15,7 +15,7 @@ public class EconomyManager {
     private static Logger logger;
 
     public EconomyManager(ClueScrollManager plugin) {
-        logger = Logger.getLogger("WDMC:" + this.getClass().getSimpleName());
+        logger = Logger.getLogger("ClueScrollManager:" + this.getClass().getSimpleName());
 
         if (plugin.getServer().getPluginManager().getPlugin("Vault") == null) {
             return;
@@ -28,21 +28,21 @@ public class EconomyManager {
 
     public static EconomyResponse depositPlayer(Player player, double amount) {
         logger.info(
-                String.format("Vault Player Currency --> Balance: %1$s | Depositing: %2$s | Player: %3$s",
+                String.format("Vault Player Currency --> Balance: %1$s$ | Depositing: %2$s$ | Player: %3$s",
                         getPlayerBalance(player), amount, player.getName()));
         return vaultEconomy.depositPlayer(player, amount);
     }
 
     public static EconomyResponse withdrawPlayer(Player player, double amount) {
         logger.info(
-                String.format("Vault Player Currency --> Balance: %1$s | Withdrawing: %2$s | Player: %3$s",
+                String.format("Vault Player Currency --> Balance: %1$s$ | Withdrawing: %2$s$ | Player: %3$s",
                         amount, player.getName()));
         return vaultEconomy.withdrawPlayer(player, amount);
     }
 
     public static double getPlayerBalance(Player player) {
         final double balance = vaultEconomy.getBalance(player);
-        logger.info(String.format("Vault Player Currency --> Balance: %1$s | Player: %2$s", balance, player.getName()));
+        logger.info(String.format("Vault Player Currency --> Balance: %1$s$ | Player: %2$s", balance, player.getName()));
         return balance;
     }
 

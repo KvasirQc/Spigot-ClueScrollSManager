@@ -18,31 +18,79 @@ public class ScrollExchangeCmd extends PlayerBaseCmd {
   public void execute() {
     try {
       final ClueScrollsAPI api = plugin.getScrollAPI();
-      final String tier = args[0];
-      final int amount = Integer.parseInt(args[1]);
+      final int scrollValue = 5;
 
-      var tiers = api.getTiers();
-      if (!tiers.contains(tier) || amount < 1) {
-        logger
-            .info(String.format("Unable to make scroll exchange. [Invalid amount or tier... Tier: %1$s | Amount: %2$s]",
-                tier, amount));
+      if (args == null || args[0] == null) {
+        final String msg = "Unable to make scroll exchange: Invalid arguments tier is required.";
+
+        player.sendMessage(msg);
+        logger.info(msg);
         return;
       }
 
-      int findCount = 0;
-      var playerItems = player.getInventory().getContents();
-
-      for (ItemStack itemStack : playerItems) {
-        if (itemStack.getAmount() == 1 && api.getScrollTier(itemStack).equals(tier)) {
-          itemStack.setAmount(0);
-          findCount++;
-        }
+      if (scrollValue <= 0) {
+        final String msg = "Unable to make scroll exchange: Invalid arguments the sroll value is negative.";
+        player.sendMessage(msg);
+        logger.info(msg);
+        return;
       }
 
-      EconomyManager.depositPlayer(player, 1 * findCount);
+      final String askedTier = args[0].toString().toLowerCase();
+      final int askedAmount = Integer.parseInt(args.length > 1 ? args[1] : "256");
+
+      if (!api.getTiers().contains(askedTier) || askedAmount < 1) {
+        final String msg = String.format(
+            "Unable to make scroll exchange: Invalid amount or tier --> [Tier: %1$s | Amount: %2$s]",
+            askedTier, askedAmount);
+
+        player.sendMessage(msg);
+        logger.info(msg);
+        return;
+      }
+
+      int exchangeCount = 0;
+      final ItemStack[] playerItems = player.getInventory().getContents();
+      for (ItemStack itemStack : playerItems) {
+        if ((exchangeCount == askedAmount)) {
+          break;
+        }
+
+        if (itemStack == null || itemStack.getAmount() != 1) {
+          continue;
+        }
+
+        final String itemTier = api.getScrollTier(itemStack);
+        if (itemTier == null || !itemTier.equals(askedTier)) {
+          continue;
+        }
+
+        itemStack.setAmount(0);
+        exchangeCount++;
+      }
+
+      if (exchangeCount <= 0) {
+        final String msg = String.format("No %1$s scroll was found in your inventory...");
+        player.sendMessage(msg);
+        logger.info(msg);
+        return;
+      }
+
+      final int depositValue = scrollValue * exchangeCount;
+      EconomyManager.depositPlayer(player, depositValue);
+
+      final String msg = String.format("Player %1$s exchanged %2$s %3$s scrolls at %4$s$ each.", player.getName(),
+          exchangeCount, askedTier, scrollValue);
+
+      player.sendMessage(msg);
+      logger.info(msg);
 
     } catch (Exception e) {
-      logger.warning("Unknown error ocurred during scroll exchange.");
+      final String msg = String.format("Unknown error ocurred during the scroll exchange with %1$s:", player.getName());
+
+      player.sendMessage(msg);
+      logger.severe(msg);
+      logger.severe(e.getMessage());
+      e.printStackTrace();
     }
   }
 

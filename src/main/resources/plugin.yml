@@ -8,7 +8,7 @@ softdepends: [Vault, ClueScrolls]
 commands:
   scroll-upgrade:
     description: Used to upgrade scrolls to higher tiers scrolls
-    usage: /scroll-exchange <tier:number> <amount:number>
+    usage: /scroll-exchange <tier:string> [amount:number default:all]
   scroll-exchange:
     description: Used to exchange scrolls for coins
-    usage: /scroll-exchange <tier:number> <amount:number>
+    usage: /scroll-exchange <tier:string> [amount:number default:all]
