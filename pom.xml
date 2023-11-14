@@ -82,7 +82,7 @@
         <dependency>
             <groupId>com.github.electro2560</groupId>
             <artifactId>ClueScrollsAPI</artifactId>
-            <version>master</version>
+            <version>master-SNAPSHOT</version>
             <scope>provided</scope>
         </dependency>
     </dependencies>
