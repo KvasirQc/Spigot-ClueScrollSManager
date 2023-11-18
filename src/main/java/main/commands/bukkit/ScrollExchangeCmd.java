@@ -15,13 +15,13 @@ public class ScrollExchangeCmd extends PlayerBaseCmd {
   private int getScrollTierValue(String tierName) {
     switch (tierName.toLowerCase()) {
       case "common":
-        return 5;
+        return 25;
 
       case "special":
-        return 10;
+        return 200;
 
       case "legendary":
-        return 15;
+        return 1000;
 
       default:
         return 1;
@@ -92,8 +92,8 @@ public class ScrollExchangeCmd extends PlayerBaseCmd {
       final int depositValue = scrollValue * exchangeCount;
       EconomyManager.depositPlayer(player, depositValue);
 
-      final String msg = String.format("Player %1$s exchanged %2$s %3$s scrolls at %4$s$ each.", player.getName(),
-          exchangeCount, sourceTier, scrollValue);
+      final String msg = String.format("Player %1$s exchanged %2$s %3$s scrolls at %4$s$ each, for a total of: %5$s$", player.getName(),
+          exchangeCount, sourceTier, scrollValue, depositValue);
 
       player.sendMessage(msg);
       logger.info(msg);

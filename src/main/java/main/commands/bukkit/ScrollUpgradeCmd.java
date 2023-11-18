@@ -36,10 +36,10 @@ public class ScrollUpgradeCmd extends PlayerBaseCmd {
 
     switch (tierName.toLowerCase()) {
       case "common":
-        return 10;
+        return 9;
 
       case "special":
-        return 10;
+        return 9;
 
       default:
         return 0;
